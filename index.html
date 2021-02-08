@@ -19,21 +19,29 @@
         <aside class = "col-sm-2 p-3">
             <h2>Time Left</h2>
             <br><br><br><br>
-            <h4>1:00</h4>
+            <h4><span id = "timeRemaining">00:00</span></h4>
 
         </aside>
     
         <section class = "col-sm-8 p-3">
-    
+            <div class="row"><span id = "testQuestion">testQuestion</span></div>
+            <div class="row">Possible Answers</div>
         </section>
 
         <aside class = "col-sm-2 p-3">
             <h2>Score</h2>
-            <br><br><br><br><br>
-            <h4>0</h4>
+            <h4><span id = "playerScore">0</span></h4>
+            <br>
+            <h2>High Score</h2>
+            <h4><span id = "highScore">0</span></h4>
         </aside>
-    </div>
 
+        
+    </div>
+    <div class = "col-6 mx-auto d-grid gap-2">
+        <button type = "button" class="btn btn-lg btn-primary">Start!</button>
+    </div>
+    
 </main>
 
 

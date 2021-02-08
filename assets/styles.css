@@ -13,19 +13,19 @@ header {
 
 aside {
     background-color: #a4ebf3;
-    height: 400px;
     text-align: center;
-    
 }
 
 main {
-    justify-content: center;
+    
 }
 
 section {
     background-color: #ccf2f4;
+
 }
 
 .row {
     --bs-gutter-x: 0;
+    margin-bottom: 50px;
 }
