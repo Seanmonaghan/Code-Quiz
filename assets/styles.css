@@ -29,3 +29,12 @@ section {
     --bs-gutter-x: 0;
     margin-bottom: 50px;
 }
+
+.btn {
+    margin: 10px;
+}
+
+#testQuestion {
+    text-align: center;
+    font-size: 2rem;
+}
