@@ -1,10 +1,12 @@
 // Elements that change
+let startButton = document.getElementById("startButton");
 let timeLeft = document.getElementById("timeRemaining");
 let score = document.getElementById("playerScore");
 let highScore = document.getElementById("highScore");
 let testQuestion = document.getElementById("testQuestion");
 let possibleAnswer = document.getElementById("possibleAnswers");
 let initials = document.getElementById("initials");
+
 
 
 // Local storage elements
@@ -109,10 +111,15 @@ let testQuestions = [{
 
 // Basic Game
 
-testQuestion.innerText = "What is the equivalent of a python list in Javascript?";
+// testQuestion.innerText = "What is the equivalent of a python list in Javascript?";
+
+
+    // Generates and iterates through the questions and answers from testQuestion array
+    // displaying them as text for the question and list items for the answers.
 
 function startGame() {
-    for (i = 0; i < testQuestions.length; i++) {
+   
+    for (i = 0; i < testQuestions.length;) {
         testQuestion.innerText = testQuestions[i].question;
         let firstAnswer = document.createElement("li");
         let secondAnswer = document.createElement("li");
@@ -133,20 +140,18 @@ function startGame() {
         possibleAnswer.appendChild(secondAnswer);
         possibleAnswer.appendChild(thirdAnswer);
         possibleAnswer.appendChild(fourthAnswer);
+
+        if (testQuestionClicked != testQuestions[i].answer) {
+            time = (time - 5);
+            testQuestionClicked.style.color = "red";
+        } else if (testQuestionClicked === testQuestion[i].answer) {
+            i++
+        }
     }
-    
-
-
-
-
 }
 
-startGame();
+startButton.addEventListener('click', startGame);
 
-possibleAnswer.appendChild(firstAnswer);
-possibleAnswer.appendChild(secondAnswer);
-possibleAnswer.appendChild(thirdAnswer);
-possibleAnswer.appendChild(fourthAnswer);
 
 
 localStorage.setItem("savedInitials", "???");
