@@ -7,23 +7,28 @@ let testQuestion = document.getElementById("testQuestion");
 let possibleAnswer = document.getElementById("possibleAnswers");
 let initials = document.getElementById("initials");
 
+var timerCount; 
+var timer;
+
+
 
 
 // Local storage elements
 let savedHighScore = localStorage.getItem("savedHighScore");
 highScore.textContent = savedHighScore;
+
 let savedInitials = localStorage.getItem("savedInitials");
 initials.textContent = savedInitials;
 
 let testQuestions = [{
-        question: "which of these are not fruits",
+        question: " The syntax of a blur method in a button object is ______________",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "Blur( )",
+            second: "Blur(contrast)",
+            third: "Blur(value)",
+            fourth: "Blur(depth)"
         },
-        answer: "fourth"
+        answer: "first"
     }, {
         question: "which of these are not fruits",
         answers: {
@@ -107,18 +112,19 @@ let testQuestions = [{
         answer: "fourth"
     },
 
-]
+];
 
-// Basic Game
+function startTimer() {
+    timerCount = 100;
+    timer = setInterval(function() {
+        timerCount--;
+        timeLeft.textContent = timerCount;
+        
 
-// testQuestion.innerText = "What is the equivalent of a python list in Javascript?";
+    }, 1000);
+}
 
-
-    // Generates and iterates through the questions and answers from testQuestion array
-    // displaying them as text for the question and list items for the answers.
-
-function startGame() {
-   
+function renderGame() {
     for (i = 0; i < testQuestions.length;) {
         testQuestion.innerText = testQuestions[i].question;
         let firstAnswer = document.createElement("li");
@@ -141,20 +147,24 @@ function startGame() {
         possibleAnswer.appendChild(thirdAnswer);
         possibleAnswer.appendChild(fourthAnswer);
 
-        if (testQuestionClicked != testQuestions[i].answer) {
-            time = (time - 5);
-            testQuestionClicked.style.color = "red";
-        } else if (testQuestionClicked === testQuestion[i].answer) {
-            i++
-        }
-    }
-}
+        i++;
+
+    };
+};
+
+
+
+function startGame() {
+
+    startButton.disabled = true;
+    renderGame();
+    startTimer();
+
+};
 
 startButton.addEventListener('click', startGame);
-
 
 
 localStorage.setItem("savedInitials", "???");
 localStorage.setItem("savedHighScore", "???");
 
-// init
