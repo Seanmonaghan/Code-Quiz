@@ -34,3 +34,9 @@ section {
     text-align: center;
     font-size: 2rem;
 }
+
+#helper {
+    text-align: center;
+    background-color: #e7e6e1;
+    margin-bottom: 20px;
+}
