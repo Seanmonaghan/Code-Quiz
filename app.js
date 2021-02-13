@@ -29,7 +29,7 @@ var selection = document.addEventListener('click', function (e) {
         } else if (selection === "Start!") {
             
             startGame();
-        } else {
+        } else if (selection != answer && timerCount > 0){
             timerCount = timerCount - 5;
             helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
         }
