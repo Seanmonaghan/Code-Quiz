@@ -11,6 +11,8 @@ let helper = document.getElementById("helper");
 var timerCount;
 var timer;
 var i = 0;
+
+var liEl = document.getElementsByTagName("LI");
 // var isCorrect = false;
 
 // let selectedAnswer = document.body.addEventListener('click', function(e) {
@@ -29,7 +31,7 @@ let savedInitials = localStorage.getItem("savedInitials");
 initials.textContent = savedInitials;
 
 let testQuestions = [{
-        question: " The syntax of a blur method in a button object is ______________",
+        question: "The syntax of a blur method in a button object is ______________",
         answers: {
             first: "Blur( )",
             second: "Blur(contrast)",
@@ -38,119 +40,136 @@ let testQuestions = [{
         },
         answer: "Blur( )"
     }, {
-        question: "which of these are not fruits",
+        question: "A ________ object is a reference to one of the classes in a Java package, such as netscape.javascript.",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "JavaArray",
+            second: "JavaClass",
+            third: "JavaObject",
+            fourth: "JavaPackage"
         },
-        answer: "Javascript Arrays"
+        answer: "JavaClass"
     }, {
-        question: "which of these are not fruits",
+        question: "Which best explains getSelection()?",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "Returns the VALUE of a selected OPTION.",
+            second: "Returns document.URL of the window in focus.",
+            third: "Returns the value of cursor-selected text.",
+            fourth: "Returns the VALUE of a checked radio input."
         },
-        answer: "fourth"
+        answer: "Returns the value of cursor-selected text."
     }, {
-        question: "which of these are not fruits",
+        question: "Choose the client-side JavaScript object",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "Database",
+            second: "Cursor",
+            third: "Client",
+            fourth: "FileUpLoad"
         },
-        answer: "fourth"
+        answer: "FileUpLoad"
     }, {
-        question: "which of these are not fruits",
+        question: "What is mean by 'this' keyword in javascript?",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "It refers current object",
+            second: "It refers previous object",
+            third: "It is variable which contains value",
+            fourth: "None of the above"
         },
-        answer: "fourth"
+        answer: "It refers current object"
     }, {
-        question: "which of these are not fruits",
+        question: "The syntax of close method for document object is ______________",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "Close(doC.",
+            second: "Close(object)",
+            third: "Close(val)",
+            fourth: "Close()"
         },
-        answer: "fourth"
+        answer: "Close()"
     }, {
-        question: "which of these are not fruits",
+        question: "To open a dialog box each time an error occurs, which of the following is added to prefs.js?",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "user_pref('javascript.classic.error_alerts', true);",
+            second: "user_pref('javascript.classic.error_alerts ', false);",
+            third: "user_pref('javascript.console.open_on_error ', true);",
+            fourth: "user_pref('javascript.console.open_on_error ', false);"
         },
-        answer: "fourth"
+        answer: "user_pref('javascript.classic.error_alerts', true);"
     }, {
-        question: "which of these are not fruits",
+        question: "_______ class provides an interface for invoking JavaScript methods and examining JavaScript properties.",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "ScriptObject",
+            second: "JSObject",
+            third: "JavaObject",
+            fourth: "J-pop"
         },
-        answer: "fourth"
+        answer: "JSObject"
     }, {
-        question: "which of these are not fruits",
+        question: " To enable data tainting, the end user sets the _________ environment variable.",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "ENABLE_TAINT",
+            second: "MS_ENABLE_TAINT",
+            third: "NS_ENABLE_TAINT",
+            fourth: "ENABLE_TAINT_NS"
         },
-        answer: "fourth"
+        answer: "NS_ENABLE_TAINT"
     }, {
-        question: "which of these are not fruits",
+        question: "Which tag(s) can handle mouse events in Netscape",
         answers: {
-            first: "apple",
-            second: "banana",
-            third: "grape",
-            fourth: "Javascript Arrays"
+            first: "<IMG>",
+            second: "<A>",
+            third: "<BR>",
+            fourth: "None of the above"
         },
-        answer: "fourth"
+        answer: "<A>"
     },
 
 ];
 
 function startTimer() {
-    timerCount = 200;
+    timerCount = 2000;
 
     timer = setInterval(function () {
         timerCount--;
         timeLeft.textContent = timerCount;
         score.innerText = timerCount;
 
+        if (timerCount < 1) {
+            clearInterval(timer);
+            testQuestion.innerText = "Game Over - Time Out!"
+            startButton.disabled = false;
+        }
 
     }, 1000);
 };
 
-function checkWin() {
-    document.addEventListener('click', function(e) {
-        var selection = e.target.textContent;
-        if (selection === testQuestions[i].answer) {
-            console.log(selection);
+function gameWon() {
             console.log("success");
             i++;
             helper.textContent = "Good job!!"
-
             possibleAnswer.innerHTML = ""
             
             renderGame();
+};
+
+function gameLose() {
+     // console.log(selection);
+     console.log(testQuestions[i].answer);
+     // console.log("failure");
+     timerCount = timerCount - 5;
+     helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
+};
+
+function checkWin() {
+    document.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var selection = e.target.textContent;
+
+        if (selection === testQuestions[i].answer) {
+            
+            gameWon();
+            
+
         } else {
-            console.log(selection);
-            console.log("failure");
-            timerCount = timerCount - 5;
-            helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"   
+            gameLose();
         };
     });
 };
@@ -178,13 +197,27 @@ function renderGame() {
     possibleAnswer.appendChild(thirdAnswer);
     possibleAnswer.appendChild(fourthAnswer);
 
-    checkWin();
+    if (i < 9) {
+        checkWin();
+        
+    } else {
+        helper.innerHTML = "Game Over!";
+        possibleAnswer.innerHTML = "";
+        testQuestion.innerHTML = "Game Over!"
+        clearInterval(timer);
+        if (score.innerText > savedHighScore) {
+            localStorage.setItem("savedHighScore", score.innerText);
+        }
+        
+    };
+    
 
     };
 
 
 function startGame() {
     startButton.disabled = true;
+    possibleAnswer.innerHTML = "";
     renderGame();
     startTimer();
 };
@@ -192,5 +225,3 @@ function startGame() {
 startButton.addEventListener('click', startGame);
 
 
-localStorage.setItem("savedInitials", "???");
-localStorage.setItem("savedHighScore", "???");
