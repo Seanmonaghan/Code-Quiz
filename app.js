@@ -7,19 +7,50 @@ let testQuestion = document.getElementById("testQuestion");
 let possibleAnswer = document.getElementById("possibleAnswers");
 let initials = document.getElementById("initials");
 let helper = document.getElementById("helper");
+var answer = ''
 
 var timerCount;
 var timer;
 var i = 0;
 
-var liEl = document.getElementsByTagName("LI");
-// var isCorrect = false;
 
-// let selectedAnswer = document.body.addEventListener('click', function(e) {
-//     console.log(e.target.textContent);
-//     return e.target.textContent;
+var selection = document.addEventListener('click', function (e) {
+    e.stopPropagation();
+    selection = e.target.textContent;
+    console.log("Initial Selection: " + selection);
+    if (i < 9) {
+        if (selection === answer) {
+            console.log("success");
+            i++;
+            helper.textContent = "Good job!!"
+            possibleAnswer.innerHTML = ""
 
-// });
+            renderGame();
+        } else if (selection === "Start!") {
+            
+            startGame();
+        } else {
+            timerCount = timerCount - 5;
+            helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
+        }
+    } else {
+        helper.innerHTML = "Game Over!";
+        possibleAnswer.innerHTML = "";
+        testQuestion.innerHTML = "Game Over!"
+        clearInterval(timer);
+        startButton.disabled = false;
+        if (score.innerText > savedHighScore) {
+            localStorage.setItem("savedHighScore", score.innerText);
+            var winnerInitials = prompt("Enter your initials!")
+            localStorage.setItem("savedInitials", winnerInitials);
+            startButton.disabled = false;
+            i = 0;
+        } else {
+            i = 0;
+        }
+    }
+
+});
 
 
 
@@ -125,7 +156,7 @@ let testQuestions = [{
 ];
 
 function startTimer() {
-    timerCount = 2000;
+    timerCount = 100;
 
     timer = setInterval(function () {
         timerCount--;
@@ -135,43 +166,51 @@ function startTimer() {
         if (timerCount < 1) {
             clearInterval(timer);
             testQuestion.innerText = "Game Over - Time Out!"
+            possibleAnswer.innerHTML = "";
+            helper.innerText = "Try Again!"
             startButton.disabled = false;
         }
 
     }, 1000);
 };
 
-function gameWon() {
-            console.log("success");
-            i++;
-            helper.textContent = "Good job!!"
-            possibleAnswer.innerHTML = ""
-            
-            renderGame();
-};
+// function gameWon() {
+//     console.log("success");
+//     i++;
+//     helper.textContent = "Good job!!"
+//     possibleAnswer.innerHTML = ""
+
+//     renderGame();
+// };
 
 function gameLose() {
-     // console.log(selection);
-     console.log(testQuestions[i].answer);
-     // console.log("failure");
-     timerCount = timerCount - 5;
-     helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
+    // console.log(selection);
+
+    timerCount = timerCount - 5;
+    helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
+
+
 };
 
 function checkWin() {
-    document.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var selection = e.target.textContent;
 
-        if (selection === testQuestions[i].answer) {
-            
-            gameWon();
-            
+    if ((i < 9) && (selection === testQuestions[i].answer)) {
+        i++;
 
-        } else {
-            gameLose();
-        };
-    });
+    }
+
+    console.log("checkWin Selection: " + selection);
+    console.log(testQuestions[i].answer)
+    selection;
+    if (selection === testQuestions[i].answer) {
+        console.log("Game Won Error");
+        gameWon();
+
+    } else {
+        console.log("Game Lost Error");
+        gameLose();
+
+    };
 };
 
 function renderGame() {
@@ -197,22 +236,30 @@ function renderGame() {
     possibleAnswer.appendChild(thirdAnswer);
     possibleAnswer.appendChild(fourthAnswer);
 
-    if (i < 9) {
-        checkWin();
-        
-    } else {
-        helper.innerHTML = "Game Over!";
-        possibleAnswer.innerHTML = "";
-        testQuestion.innerHTML = "Game Over!"
-        clearInterval(timer);
-        if (score.innerText > savedHighScore) {
-            localStorage.setItem("savedHighScore", score.innerText);
-        }
-        
-    };
-    
+    console.log(testQuestions[i].answer)
 
-    };
+    answer = testQuestions[i].answer;
+    return answer;
+
+
+
+    // checkWin();
+
+    // } else {
+    //     helper.innerHTML = "Game Over!";
+    //     possibleAnswer.innerHTML = "";
+    //     testQuestion.innerHTML = "Game Over!"
+    //     clearInterval(timer);
+    //     if (score.innerText > savedHighScore) {
+    //         localStorage.setItem("savedHighScore", score.innerText);
+    //         var winnerInitials = prompt("Enter your initials!")
+    //         localStorage.setItem("savedInitials", winnerInitials);
+    //     }
+
+    // };
+
+
+};
 
 
 function startGame() {
@@ -222,6 +269,4 @@ function startGame() {
     startTimer();
 };
 
-startButton.addEventListener('click', startGame);
-
-
+// startButton.addEventListener('click', startGame);
