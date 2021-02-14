@@ -1,4 +1,4 @@
-// Elements that change
+// Variables
 let startButton = document.getElementById("startButton");
 let timeLeft = document.getElementById("timeRemaining");
 let score = document.getElementById("playerScore");
@@ -7,59 +7,77 @@ let testQuestion = document.getElementById("testQuestion");
 let possibleAnswer = document.getElementById("possibleAnswers");
 let initials = document.getElementById("initials");
 let helper = document.getElementById("helper");
+let buttonSection = document.getElementById("buttonSection");
 var answer = ''
-
 var timerCount;
 var timer;
 var i = 0;
 
+// Local storage elements
+let savedHighScore = localStorage.getItem("savedHighScore");
+highScore.textContent = savedHighScore;
+let savedInitials = localStorage.getItem("savedInitials");
+initials.textContent = savedInitials;
 
-var selection = document.addEventListener('click', function (e) {
-    e.stopPropagation();
-    selection = e.target.textContent;
-    console.log("Initial Selection: " + selection);
-    if (i < 9) {
-        if (selection === answer) {
-            console.log("success");
-            i++;
-            helper.textContent = "Good job!!"
-            possibleAnswer.innerHTML = ""
 
-            renderGame();
-        } else if (selection === "Start!") {
-            
-            startGame();
-        } else if (selection != answer && timerCount > 0){
-            timerCount = timerCount - 5;
-            helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
-        }
-    } else {
-        helper.innerHTML = "Game Over!";
+
+if (i = 10) {
+    helper.innerHTML = "Game Over!";
         possibleAnswer.innerHTML = "";
         testQuestion.innerHTML = "Game Over!"
         clearInterval(timer);
         startButton.disabled = false;
-        if (score.innerText > savedHighScore) {
+        if (highScore > savedHighScore) {
             localStorage.setItem("savedHighScore", score.innerText);
-            var winnerInitials = prompt("Enter your initials!")
+            var winnerInitials = prompt("Enter your initials!");
             localStorage.setItem("savedInitials", winnerInitials);
             startButton.disabled = false;
             i = 0;
         } else {
             i = 0;
         }
+}
+
+var selection = document.addEventListener('click', function (e) {
+    e.stopPropagation();
+    selection = e.target.textContent;
+    console.log("Initial Selection: " + selection);
+    if (i != 10) {
+        if (selection === answer) {
+            i++;
+            helper.textContent = "Good job!!"
+            possibleAnswer.innerHTML = ""
+            renderGame();
+        } else if (selection === "Start!") {
+            startButton.disabled = true;
+            possibleAnswer.innerHTML = "";
+            renderGame();
+            startTimer();
+        } else if (selection != answer && timerCount > 0) {
+            timerCount = timerCount - 5;
+            helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
+        }
+
+    } else {
+
+        // helper.innerHTML = "Game Over!";
+        // possibleAnswer.innerHTML = "";
+        // testQuestion.innerHTML = "Game Over!"
+        // clearInterval(timer);
+        // startButton.disabled = false;
+        // if (highScore > savedHighScore) {
+        //     localStorage.setItem("savedHighScore", score.innerText);
+        //     var winnerInitials = prompt("Enter your initials!");
+        //     localStorage.setItem("savedInitials", winnerInitials);
+        //     startButton.disabled = false;
+        //     i = 0;
+        // } else {
+        //     i = 0;
+        // }
     }
 
 });
 
-
-
-// Local storage elements
-let savedHighScore = localStorage.getItem("savedHighScore");
-highScore.textContent = savedHighScore;
-
-let savedInitials = localStorage.getItem("savedInitials");
-initials.textContent = savedInitials;
 
 let testQuestions = [{
         question: "The syntax of a blur method in a button object is ______________",
@@ -169,48 +187,9 @@ function startTimer() {
             possibleAnswer.innerHTML = "";
             helper.innerText = "Try Again!"
             startButton.disabled = false;
-        }
+        };
 
     }, 1000);
-};
-
-// function gameWon() {
-//     console.log("success");
-//     i++;
-//     helper.textContent = "Good job!!"
-//     possibleAnswer.innerHTML = ""
-
-//     renderGame();
-// };
-
-function gameLose() {
-    // console.log(selection);
-
-    timerCount = timerCount - 5;
-    helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
-
-
-};
-
-function checkWin() {
-
-    if ((i < 9) && (selection === testQuestions[i].answer)) {
-        i++;
-
-    }
-
-    console.log("checkWin Selection: " + selection);
-    console.log(testQuestions[i].answer)
-    selection;
-    if (selection === testQuestions[i].answer) {
-        console.log("Game Won Error");
-        gameWon();
-
-    } else {
-        console.log("Game Lost Error");
-        gameLose();
-
-    };
 };
 
 function renderGame() {
@@ -239,34 +218,4 @@ function renderGame() {
     console.log(testQuestions[i].answer)
 
     answer = testQuestions[i].answer;
-    return answer;
-
-
-
-    // checkWin();
-
-    // } else {
-    //     helper.innerHTML = "Game Over!";
-    //     possibleAnswer.innerHTML = "";
-    //     testQuestion.innerHTML = "Game Over!"
-    //     clearInterval(timer);
-    //     if (score.innerText > savedHighScore) {
-    //         localStorage.setItem("savedHighScore", score.innerText);
-    //         var winnerInitials = prompt("Enter your initials!")
-    //         localStorage.setItem("savedInitials", winnerInitials);
-    //     }
-
-    // };
-
-
 };
-
-
-function startGame() {
-    startButton.disabled = true;
-    possibleAnswer.innerHTML = "";
-    renderGame();
-    startTimer();
-};
-
-// startButton.addEventListener('click', startGame);
