@@ -26,7 +26,6 @@ initials.textContent = savedInitials;
 var selection = document.addEventListener('click', function (e) {
     e.stopPropagation();
     selection = e.target.textContent;
-    console.log("Initial Selection: " + selection);
 });
 
 // Array of Questions
@@ -174,11 +173,12 @@ function renderGame() {
 
 // Adds event listener on entire document
 document.addEventListener('click', function () {
-    
+
     // If the correct answer is selected, proceed to the next question
     if (selection === answer && i < 9) {
         i++;
-        console.log(i);
+        var correct = new Audio('assets/sounds/correct.wav');
+        correct.play();
         helper.textContent = "Good job!!"
         possibleAnswer.innerHTML = ""
         renderGame();
@@ -192,22 +192,21 @@ document.addEventListener('click', function () {
 
     // If the wrong answer is selected, subtract 5 seconds from timer
     } else if (selection != answer && timerCount > 0) {
+        var incorrect = new Audio('assets/sounds/incorrect.wav');
+        incorrect.play();
         timerCount = timerCount - 5;
         helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
 
     // If the final answer is correct, end and reinitialize game
     } else if (selection === answer && i === 9) {
+        var win = new Audio('assets/sounds/win.mp3');
+        win.play();
         helper.innerHTML = "Game Over!";
         possibleAnswer.innerHTML = "";
         testQuestion.innerHTML = "Game Over!"
         clearInterval(timer);
         startButton.disabled = false;
         i = 0;
-        console.log(i);
-        console.log("The Saved High Score is: " + savedHighScore);
-        console.log("The Score Is: " + score)
-        console.log("The highScore.textContent is: " + highScore.textContent);
-        console.log("The Score.textContent is : " + score.textContent);
 
         // If the score is higher than the previous highest, save player info
         if (score.textContent > savedHighScore) {
