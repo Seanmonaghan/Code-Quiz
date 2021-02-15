@@ -1,33 +1,43 @@
 body {
-    background-color: #e7e6e1;
+    background-color: #276678;
 }
 
 header {
     text-align:center;
     margin-top: 100px;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: #314e52;
+    color: #f6f5f5;
     font-style: unset;
     margin-bottom: 50px;
 }
 
 aside {
-    background-color: #a4ebf3;
+    background-color: #1687a7;
     text-align: center;
+    color: #f6f5f5;
 }
 
 section {
-    background-color: #ccf2f4;
+    background-color: #d3e0ea;
 
 }
 
 .row {
     --bs-gutter-x: 0;
-    margin-bottom: 50px;
+    margin-top: 0px;
+}
+
+.g-2 {
+    margin-top: 0px;
+    --bs-gutter-y: 0px;
 }
 
 .btn {
     margin: 10px;
+}
+
+ul {
+    padding-inline-start: 0px;
 }
 
 #testQuestion {
@@ -37,6 +47,7 @@ section {
 
 #helper {
     text-align: center;
-    background-color: #e7e6e1;
+    background-color: #276678;
     margin-bottom: 20px;
+    color: #f6f5f5;
 }

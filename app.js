@@ -152,10 +152,10 @@ function renderGame() {
     let thirdAnswer = document.createElement("li");
     let fourthAnswer = document.createElement("li");
 
-    firstAnswer.className = "btn btn-secondary col-sm-12";
-    secondAnswer.className = "btn btn-secondary col-sm-12";
-    thirdAnswer.className = "btn btn-secondary col-sm-12";
-    fourthAnswer.className = "btn btn-secondary col-sm-12";
+    firstAnswer.className = "btn btn-primary col-sm-12";
+    secondAnswer.className = "btn btn-primary col-sm-12";
+    thirdAnswer.className = "btn btn-primary col-sm-12";
+    fourthAnswer.className = "btn btn-primary col-sm-12";
 
     firstAnswer.textContent = testQuestions[i].answers.first;
     secondAnswer.textContent = testQuestions[i].answers.second;
@@ -201,9 +201,9 @@ document.addEventListener('click', function () {
     } else if (selection === answer && i === 9) {
         var win = new Audio('assets/sounds/win.mp3');
         win.play();
-        helper.innerHTML = "Game Over!";
+        helper.innerHTML = "Game Over! You Win!";
         possibleAnswer.innerHTML = "";
-        testQuestion.innerHTML = "Game Over!"
+        testQuestion.innerHTML = "Game Over!! You win!!"
         clearInterval(timer);
         startButton.disabled = false;
         i = 0;
