@@ -1,4 +1,4 @@
-// Variables
+// Grab HTML elements for DOM manipulation
 let startButton = document.getElementById("startButton");
 let timeLeft = document.getElementById("timeRemaining");
 let score = document.getElementById("playerScore");
@@ -8,6 +8,8 @@ let possibleAnswer = document.getElementById("possibleAnswers");
 let initials = document.getElementById("initials");
 let helper = document.getElementById("helper");
 let buttonSection = document.getElementById("buttonSection");
+
+// Initialize Variables
 var answer = ''
 var timerCount;
 var timer;
@@ -20,8 +22,7 @@ highScore.textContent = savedHighScore;
 let savedInitials = localStorage.getItem("savedInitials");
 initials.textContent = savedInitials;
 
-// Event Listener for Page
-
+// Save text content of clicked element as Selection to compare against answers
 var selection = document.addEventListener('click', function (e) {
     e.stopPropagation();
     selection = e.target.textContent;
@@ -173,6 +174,7 @@ function renderGame() {
 
 // Adds event listener on entire document
 document.addEventListener('click', function () {
+    
     // If the correct answer is selected, proceed to the next question
     if (selection === answer && i < 9) {
         i++;
@@ -180,16 +182,19 @@ document.addEventListener('click', function () {
         helper.textContent = "Good job!!"
         possibleAnswer.innerHTML = ""
         renderGame();
+
     // If the start button is pressed, start timer and ask first question
     } else if (selection === "Start!") {
         startButton.disabled = true;
         possibleAnswer.innerHTML = "";
         renderGame();
         startTimer();
+
     // If the wrong answer is selected, subtract 5 seconds from timer
     } else if (selection != answer && timerCount > 0) {
         timerCount = timerCount - 5;
         helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
+
     // If the final answer is correct, end and reinitialize game
     } else if (selection === answer && i === 9) {
         helper.innerHTML = "Game Over!";
@@ -203,6 +208,7 @@ document.addEventListener('click', function () {
         console.log("The Score Is: " + score)
         console.log("The highScore.textContent is: " + highScore.textContent);
         console.log("The Score.textContent is : " + score.textContent);
+
         // If the score is higher than the previous highest, save player info
         if (score.textContent > savedHighScore) {
             highScore.textContent = score.textContent;
