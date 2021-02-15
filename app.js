@@ -12,6 +12,7 @@ var answer = ''
 var timerCount;
 var timer;
 var i = 0;
+var buttons = document.querySelectorAll(".btn");
 
 // Local storage elements
 let savedHighScore = localStorage.getItem("savedHighScore");
@@ -19,65 +20,13 @@ highScore.textContent = savedHighScore;
 let savedInitials = localStorage.getItem("savedInitials");
 initials.textContent = savedInitials;
 
-
-
-if (i = 10) {
-    helper.innerHTML = "Game Over!";
-        possibleAnswer.innerHTML = "";
-        testQuestion.innerHTML = "Game Over!"
-        clearInterval(timer);
-        startButton.disabled = false;
-        if (highScore > savedHighScore) {
-            localStorage.setItem("savedHighScore", score.innerText);
-            var winnerInitials = prompt("Enter your initials!");
-            localStorage.setItem("savedInitials", winnerInitials);
-            startButton.disabled = false;
-            i = 0;
-        } else {
-            i = 0;
-        }
-}
+// Event Listener for Page
 
 var selection = document.addEventListener('click', function (e) {
     e.stopPropagation();
     selection = e.target.textContent;
     console.log("Initial Selection: " + selection);
-    if (i != 10) {
-        if (selection === answer) {
-            i++;
-            helper.textContent = "Good job!!"
-            possibleAnswer.innerHTML = ""
-            renderGame();
-        } else if (selection === "Start!") {
-            startButton.disabled = true;
-            possibleAnswer.innerHTML = "";
-            renderGame();
-            startTimer();
-        } else if (selection != answer && timerCount > 0) {
-            timerCount = timerCount - 5;
-            helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
-        }
-
-    } else {
-
-        // helper.innerHTML = "Game Over!";
-        // possibleAnswer.innerHTML = "";
-        // testQuestion.innerHTML = "Game Over!"
-        // clearInterval(timer);
-        // startButton.disabled = false;
-        // if (highScore > savedHighScore) {
-        //     localStorage.setItem("savedHighScore", score.innerText);
-        //     var winnerInitials = prompt("Enter your initials!");
-        //     localStorage.setItem("savedInitials", winnerInitials);
-        //     startButton.disabled = false;
-        //     i = 0;
-        // } else {
-        //     i = 0;
-        // }
-    }
-
 });
-
 
 let testQuestions = [{
         question: "The syntax of a blur method in a button object is ______________",
@@ -215,7 +164,46 @@ function renderGame() {
     possibleAnswer.appendChild(thirdAnswer);
     possibleAnswer.appendChild(fourthAnswer);
 
-    console.log(testQuestions[i].answer)
-
     answer = testQuestions[i].answer;
+
+    
 };
+
+document.addEventListener('click', function () {
+    if (selection === answer && i < 9) {
+        i++;
+        console.log(i);
+        helper.textContent = "Good job!!"
+        possibleAnswer.innerHTML = ""
+        renderGame();
+    } else if (selection === "Start!") {
+        startButton.disabled = true;
+        possibleAnswer.innerHTML = "";
+        renderGame();
+        startTimer();
+    } else if (selection != answer && timerCount > 0) {
+        timerCount = timerCount - 5;
+        helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
+    } else if (selection === answer && i === 9) {
+        helper.innerHTML = "Game Over!";
+        possibleAnswer.innerHTML = "";
+        testQuestion.innerHTML = "Game Over!"
+        clearInterval(timer);
+        startButton.disabled = false;
+        i = 0;
+        console.log(i);
+        console.log("The Saved High Score is: " + savedHighScore);
+        console.log("The Score Is: " + score)
+        console.log("The highScore.textContent is: " + highScore.textContent);
+        console.log("The Score.textContent is : " + score.textContent);
+        if (score.textContent > savedHighScore) {
+            highScore.textContent = score.textContent;
+            localStorage.setItem("savedHighScore", score.textContent);
+            var winnerInitials = prompt("You Win! \nNew High Score! \nEnter your initials!");
+            initials = winnerInitials;
+            localStorage.setItem("savedInitials", winnerInitials);
+            startButton.disabled = false;
+            i = 0;
+        };
+    };
+});
