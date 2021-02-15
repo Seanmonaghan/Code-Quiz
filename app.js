@@ -28,6 +28,7 @@ var selection = document.addEventListener('click', function (e) {
     console.log("Initial Selection: " + selection);
 });
 
+// Array of Questions
 let testQuestions = [{
         question: "The syntax of a blur method in a button object is ______________",
         answers: {
@@ -122,6 +123,7 @@ let testQuestions = [{
 
 ];
 
+// Function to start the timer
 function startTimer() {
     timerCount = 100;
 
@@ -141,6 +143,7 @@ function startTimer() {
     }, 1000);
 };
 
+// Function to render Questions based on value of i
 function renderGame() {
     testQuestion.innerText = testQuestions[i].question;
 
@@ -165,25 +168,29 @@ function renderGame() {
     possibleAnswer.appendChild(fourthAnswer);
 
     answer = testQuestions[i].answer;
-
     
 };
 
+// Adds event listener on entire document
 document.addEventListener('click', function () {
+    // If the correct answer is selected, proceed to the next question
     if (selection === answer && i < 9) {
         i++;
         console.log(i);
         helper.textContent = "Good job!!"
         possibleAnswer.innerHTML = ""
         renderGame();
+    // If the start button is pressed, start timer and ask first question
     } else if (selection === "Start!") {
         startButton.disabled = true;
         possibleAnswer.innerHTML = "";
         renderGame();
         startTimer();
+    // If the wrong answer is selected, subtract 5 seconds from timer
     } else if (selection != answer && timerCount > 0) {
         timerCount = timerCount - 5;
         helper.textContent = "Oh sorry, wrong answer try again! -5 seconds!"
+    // If the final answer is correct, end and reinitialize game
     } else if (selection === answer && i === 9) {
         helper.innerHTML = "Game Over!";
         possibleAnswer.innerHTML = "";
@@ -196,6 +203,7 @@ document.addEventListener('click', function () {
         console.log("The Score Is: " + score)
         console.log("The highScore.textContent is: " + highScore.textContent);
         console.log("The Score.textContent is : " + score.textContent);
+        // If the score is higher than the previous highest, save player info
         if (score.textContent > savedHighScore) {
             highScore.textContent = score.textContent;
             localStorage.setItem("savedHighScore", score.textContent);
