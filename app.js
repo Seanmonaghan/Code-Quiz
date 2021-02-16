@@ -17,9 +17,9 @@ var timer;
 var i = 0;
 
 // Local storage elements
-let savedHighScore = localStorage.getItem("savedHighScore");
+let savedHighScore = sessionStorage.getItem("savedHighScore");
 highScore.textContent = savedHighScore;
-let savedInitials = localStorage.getItem("savedInitials");
+let savedInitials = sessionStorage.getItem("savedInitials");
 initials.textContent = savedInitials;
 
 // Save text content of clicked element as Selection to compare against answers
@@ -125,7 +125,7 @@ let testQuestions = [{
 
 // Function to start the timer
 function startTimer() {
-    timerCount = 400;
+    timerCount = 100;
 
     timer = setInterval(function () {
         timerCount--;
@@ -210,13 +210,11 @@ document.addEventListener('click', function () {
 
         // If the score is higher than the previous highest, save player info
         if (score.textContent > savedHighScore) {
-            console.log(score.textContent);
-            console.log(savedHighScore);
             highScore.textContent = score.textContent;
-            localStorage.setItem("savedHighScore", score.textContent);
+            sessionStorage.setItem("savedHighScore", score.textContent);
             var winnerInitials = prompt("You Win! \nNew High Score! \nEnter your initials!");
             initials.textContent = winnerInitials;
-            localStorage.setItem("savedInitials", winnerInitials);
+            sessionStorage.setItem("savedInitials", winnerInitials);
             startButton.disabled = false;
             i = 0;
         };
