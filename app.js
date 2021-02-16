@@ -125,7 +125,7 @@ let testQuestions = [{
 
 // Function to start the timer
 function startTimer() {
-    timerCount = 100;
+    timerCount = 200;
 
     timer = setInterval(function () {
         timerCount--;
@@ -209,7 +209,7 @@ document.addEventListener('click', function () {
         i = 0;
 
         // If the score is higher than the previous highest, save player info
-        if (score.textContent > savedHighScore) {
+        if (score > savedHighScore) {
             highScore.textContent = score.textContent;
             localStorage.setItem("savedHighScore", score.textContent);
             var winnerInitials = prompt("You Win! \nNew High Score! \nEnter your initials!");
