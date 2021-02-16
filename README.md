@@ -37,6 +37,7 @@ answer to determine if the chosen answer is correct or not.
 
 ```
 ![selection code snippet](assets/images/selection.JPG)
+![game logic snippet](assets/images/logic.PNG)
 
 ```
 
