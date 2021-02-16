@@ -8,13 +8,12 @@ let possibleAnswer = document.getElementById("possibleAnswers");
 let initials = document.getElementById("initials");
 let helper = document.getElementById("helper");
 let buttonSection = document.getElementById("buttonSection");
+let buttons = document.getElementsByClassName("btn");
 
 // Initialize Variables
-var answer = ''
 var timerCount;
 var timer;
 var i = 0;
-var buttons = document.querySelectorAll(".btn");
 
 // Local storage elements
 let savedHighScore = localStorage.getItem("savedHighScore");
@@ -218,5 +217,5 @@ document.addEventListener('click', function () {
             startButton.disabled = false;
             i = 0;
         };
-    };
+    }; 
 });
