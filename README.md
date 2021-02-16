@@ -26,8 +26,8 @@ button which will begin the timer and render the first set of questions
 and answers on the screen.  
 
 ```
-![timer code snippet](assets/images/timer.png)
-![render code snippet](assets/images/render.png)
+![timer code snippet](assets/images/timer.PNG)
+![render code snippet](assets/images/render.PNG)
 
 ```
 
@@ -36,7 +36,7 @@ variable selection, and that will be compared to the text content of the
 answer to determine if the chosen answer is correct or not.
 
 ```
-![selection code snippet](assets/images/selection.jpg)
+![selection code snippet](assets/images/selection.JPG)
 
 ```
 
@@ -44,13 +44,13 @@ When they select the correct answer from the list of answers, the quiz
 will display the next question and inform them they were correct.
 
 ```
-![correct answer message](assets/images/correct.png)
+![correct answer message](assets/images/correct.PNG)
 ```
 When they select the incorrect answer, they will be informed as to such and
 that they have lost 5 seconds off their time remaining.
 
 ```
-![incorrect answer message](assets/images/wrongAnswer.png)
+![incorrect answer message](assets/images/wrongAnswer.PNG)
 
 ```
 
@@ -58,7 +58,7 @@ When all of the questions are answered, or when the timer reaches 0, the game
 terminates.  
 
 ```
-![overall code snippet](assets/images/overall.png)
+![overall code snippet](assets/images/overall.PNG)
 ```
 
 If the player surpasses the previous top score, which is based on the amount of 
@@ -66,5 +66,5 @@ time remaining, then they will be able to record their score and initials.
 
 ```
 
-![high score code snippet](assets/images/highscore.png)
+![high score code snippet](assets/images/highscore.PNG)
 
