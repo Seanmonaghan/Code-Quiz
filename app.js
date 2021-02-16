@@ -11,6 +11,7 @@ let buttonSection = document.getElementById("buttonSection");
 let buttons = document.getElementsByClassName("btn");
 
 // Initialize Variables
+var answer = "";
 var timerCount;
 var timer;
 var i = 0;
