@@ -209,7 +209,9 @@ document.addEventListener('click', function () {
         i = 0;
 
         // If the score is higher than the previous highest, save player info
-        if (score > savedHighScore) {
+        if (score.textContent > savedHighScore) {
+            console.log(score.textContent);
+            console.log(savedHighScore);
             highScore.textContent = score.textContent;
             localStorage.setItem("savedHighScore", score.textContent);
             var winnerInitials = prompt("You Win! \nNew High Score! \nEnter your initials!");
